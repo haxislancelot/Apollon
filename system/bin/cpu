@@ -1,0 +1,5 @@
+#!/system/bin/sh
+
+echo '4' > /sys/devices/system/cpu/cpu0/core_ctl/min_cpus
+echo '4' > /sys/devices/system/cpu/cpu4/core_ctl/min_cpus
+exit 0;

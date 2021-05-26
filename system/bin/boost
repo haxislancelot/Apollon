@@ -1,0 +1,22 @@
+#!/system/bin/sh
+
+clear
+echo
+sleep 2
+echo ""
+free | awk '/Mem/{print "Free memory before increasing: "$4/1024" MB";}'
+echo "";
+echo -n "====> Boosting !! Please wait!!";
+sync;
+echo -n ".";
+sleep 1
+echo "3" > /proc/sys/vm/drop_caches;
+sleep 1
+echo -n ".";
+echo "";
+echo "====> Eliminating all caches..."
+sleep 2
+echo ""
+echo "====> Done!!! Your device is now optimized !!";
+echo "";
+free | awk '/Mem/{print "Memória livre após reforço! : "$4/1024" MB";}'
