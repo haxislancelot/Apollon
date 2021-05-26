@@ -1,0 +1,20 @@
+APOLLON V14.0 REVIVED VERSION 
+
+Changes: - Option to enable or disable low ram; 
+- New ram, dns, internet, cpu, gpu scripts; 
+- Best Organization; 
+- Tweaks of build.prop changed and improved; 
+
+Obs. You can still clean a ram from the terminal! 
+
+su
+
+to enter 
+
+su-c boost
+
+wai
+
+
+
+support: https://t.me/haxisprojects

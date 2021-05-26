@@ -1,0 +1,33 @@
+#!/system/bin/sh
+sleep 30
+# VM TWEAKS
+stop perfd
+echo '100' > /proc/sys/vm/swappiness
+echo '0' > /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk
+echo '0' > /proc/sys/vm/overcommit_ratio
+echo '100' > /proc/sys/vm/vfs_cache_pressure
+echo '29615' > /proc/sys/vm/extra_free_kbytes
+echo '256' > /proc/sys/kernel/random/read_wakeup_threshold
+echo '256' > /proc/sys/kernel/random/write_wakeup_threshold
+echo '2048' > /sys/block/mmcblk0/queue/read_ahead_kb
+echo '0' > /sys/block/mmcblk0/queue/iostats
+echo '1' > /sys/block/mmcblk0/queue/add_random
+echo '2048' > /sys/block/mmcblk1/queue/read_ahead_kb
+echo '0' > /sys/block/mmcblk1/queue/iostats
+echo '1' > /sys/block/mmcblk1/queue/add_random
+echo '4096' > /proc/sys/vm/min_free_kbytes
+echo '0' > /proc/sys/vm/oom_kill_allocating_task
+echo '40' > /proc/sys/vm/dirty_ratio
+echo '10' > /proc/sys/vm/dirty_background_ratio
+chmod 666 /sys/module/lowmemorykiller/parameters/minfree
+chown root /sys/module/lowmemorykiller/parameters/minfree
+echo '20949,27932,34915,76813,104745,111728' > /sys/module/lowmemorykiller/parameters/minfree
+# Adding 1024MB of zRAM
+busybox swapoff /dev/block/zram0 > /dev/null 2>&1
+busybox echo '1' > /sys/block/zram0/reset
+busybox echo '0' > /sys/block/zram0/disksize
+busybox echo '1' > /sys/block/zram0/max_comp_streams
+busybox echo '1073741824' > /sys/block/zram0/disksize
+busybox mkswap /dev/block/zram0 > /dev/null 2>&1
+busybox swapon /dev/block/zram0 > /dev/null 2>&1
+exit 0;
